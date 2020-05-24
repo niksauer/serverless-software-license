@@ -1,3 +1,3 @@
 export * from './lib/LicenseManager';
-export * from './lib/RegistryContract';
+export * from './lib/LicenseRegistry';
 export * from './lib/util';

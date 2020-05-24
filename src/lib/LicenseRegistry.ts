@@ -1,10 +1,10 @@
 import {
-  IRegistryContract,
-  ContractEventHandler,
-  RegistryContractEvent,
+  ILicenseRegistry,
+  LicenseRegistryEventHandler,
+  LicenseRegistryEvent,
 } from '../types/registry';
 
-export class RegistryContract implements IRegistryContract {
+export class LicenseRegistry implements ILicenseRegistry {
   // MARK: - Public Properties
 
   // MARK: - Private Properties
@@ -22,8 +22,8 @@ export class RegistryContract implements IRegistryContract {
   }
 
   subscribe(
-    handler: ContractEventHandler,
-    filter?: RegistryContractEvent[] | undefined
+    handler: LicenseRegistryEventHandler,
+    filter?: LicenseRegistryEvent[] | undefined
   ): void {
     throw new Error('Method not implemented.');
   }

@@ -4,6 +4,10 @@ export interface License {
   challenge: AddressOwnershipChallenge & { response: string };
 }
 
+export enum LicenseManagerEvent {
+  LicenseValidityChanged = 'LICENSE_VALIDITY_CHANGED',
+}
+
 export interface ILicenseManager {
   readonly isValid: boolean;
   readonly emitter: EventEmitter;

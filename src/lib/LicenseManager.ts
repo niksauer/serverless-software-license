@@ -1,6 +1,11 @@
-import { ILicenseManager, License } from '../types/license';
-import { IRegistryContract } from '../types/registry';
+import {
+  ILicenseManager,
+  License,
+  LicenseManagerEvent,
+} from '../types/manager';
+import { ILicenseRegistry } from '../types/registry';
 import { AddressOwnershipChallenge, EventEmitter } from '../types/util';
+import Events from 'events';
 
 export class LicenseManager implements ILicenseManager {
   // MARK: - Public Properties
@@ -13,18 +18,20 @@ export class LicenseManager implements ILicenseManager {
   }
 
   // MARK: - Private Properties
-  private registry: IRegistryContract;
+  private registry: ILicenseRegistry;
   private path: string;
 
   private _isValid = false;
-  private _emitter: EventEmitter = '';
+  private _emitter: EventEmitter;
 
   private activeChallenge?: AddressOwnershipChallenge;
 
   // MARK: - Initialization
-  constructor(registry: IRegistryContract, path: string) {
+  constructor(registry: ILicenseRegistry, path: string) {
     this.registry = registry;
     this.path = path;
+
+    this._emitter = new Events.EventEmitter();
   }
 
   // MARK: - Public Methods
@@ -48,6 +55,11 @@ export class LicenseManager implements ILicenseManager {
   }
 
   // MARK: - Private Methods
+  private setIsValid(value: boolean) {
+    this.setIsValid(value);
+    this.emitter.emit(LicenseManagerEvent.LicenseValidityChanged, value);
+  }
+
   private async readLicense(): Promise<License> {
     throw new Error('Method not implemented.');
   }

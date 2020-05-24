@@ -1,14 +1,14 @@
-export enum RegistryContractEvent {
+export enum LicenseRegistryEvent {
   LicensePurchased,
 }
 
-type ContractEventHandler = (event: RegistryContractEvent) => void;
+type LicenseRegistryEventHandler = (event: LicenseRegistryEvent) => void;
 
-export interface IRegistryContract {
+export interface ILicenseRegistry {
   hasLicense(address: string): Promise<boolean>;
   generatePurchaseTransaction(address: string): string;
   subscribe(
-    handler: ContractEventHandler,
-    filter?: RegistryContractEvent[]
+    handler: LicenseRegistryEventHandler,
+    filter?: LicenseRegistryEvent[]
   ): void;
 }
