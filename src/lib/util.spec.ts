@@ -5,7 +5,7 @@ import { AddressOwnershipChallenge } from '../types/util';
 test('verify ownership', (t) => {
   const challenge: AddressOwnershipChallenge = {
     address: '',
-    challenge: '',
+    data: '',
   };
 
   const response = '';

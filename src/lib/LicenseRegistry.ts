@@ -1,16 +1,21 @@
+import { Contract } from 'ethers';
 import {
   ILicenseRegistry,
   LicenseRegistryEventHandler,
   LicenseRegistryEvent,
 } from '../types/registry';
+import { Provider } from 'ethers/providers';
 
 export class LicenseRegistry implements ILicenseRegistry {
   // MARK: - Public Properties
 
   // MARK: - Private Properties
+  private contract: Contract;
 
   // MARK: - Initialization
-  constructor(address: string) {}
+  constructor(address: string, provider: Provider, abi?: any) {
+    this.contract = new Contract(address, [], provider);
+  }
 
   // MARK: - Public Methods
   hasLicense(address: string): Promise<boolean> {
@@ -21,11 +26,11 @@ export class LicenseRegistry implements ILicenseRegistry {
     throw new Error('Method not implemented.');
   }
 
-  subscribe(
-    handler: LicenseRegistryEventHandler,
-    filter?: LicenseRegistryEvent[] | undefined
+  subscribe<Event extends LicenseRegistryEvent>(
+    event: Event,
+    handler: LicenseRegistryEventHandler<Event>
   ): void {
-    throw new Error('Method not implemented.');
+    this.contract.addListener(event, handler);
   }
 
   // MARK: - Private Methods

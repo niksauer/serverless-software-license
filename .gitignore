@@ -11,3 +11,5 @@ coverage
 package-lock.json
 
 .DS_Store
+
+ethereum/ganache-data
