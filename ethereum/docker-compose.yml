@@ -1,0 +1,22 @@
+# Please refer https://docs.docker.com/compose to learn more about Docker Compose.
+version: '3.4'
+
+services:
+  blockchain:
+    image: trufflesuite/ganache-cli:v6.9.1
+    ports:
+      - 8545:8545
+    command:
+      # https://github.com/trufflesuite/ganache-cli#using-ganache-cli
+      - '--accounts'
+      - '3'
+      # - '--defaultBalanceEther' # defaults to 100 ether
+      # - '1000'
+      # - '--gasPrice' # defaults to 20000000000 wei
+      # - '1'
+      - '--mnemonic'
+      - 'make purchase caution interest current shiver amount flat donkey sun coyote corn'
+      - '--db'
+      - '/ganache-data'
+    volumes:
+      - ./ganache-data:/ganache-data
