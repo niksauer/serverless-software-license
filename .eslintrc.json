@@ -22,5 +22,7 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint", "prettier"],
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/require-await": "warn"
+  }
 }
