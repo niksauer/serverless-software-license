@@ -1,8 +1,8 @@
 import { Contract } from 'ethers';
 import {
   ILicenseRegistry,
-  LicenseRegistryEventHandler,
-  LicenseRegistryEvent,
+  LicenseTokenEventHandler,
+  LicenseTokenEvent,
 } from '../types/registry';
 import { Provider } from 'ethers/providers';
 
@@ -26,9 +26,9 @@ export class LicenseRegistry implements ILicenseRegistry {
     throw new Error('Method not implemented.');
   }
 
-  subscribe<Event extends LicenseRegistryEvent>(
+  subscribe<Event extends LicenseTokenEvent>(
     event: Event,
-    handler: LicenseRegistryEventHandler<Event>
+    handler: LicenseTokenEventHandler<Event>
   ): void {
     this.contract.addListener(event, handler);
   }
