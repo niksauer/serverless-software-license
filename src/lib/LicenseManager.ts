@@ -2,9 +2,9 @@ import {
   ILicenseManager,
   License,
   LicenseManagerEvent,
-} from '../types/manager';
-import { ILicenseRegistry } from '../types/registry';
-import { AddressOwnershipChallenge, EventEmitter } from '../types/util';
+} from './interfaces/manager';
+import { ILicenseRegistry } from './interfaces/registry';
+import { AddressOwnershipChallenge, EventEmitter } from './interfaces/util';
 import Events from 'events';
 
 export class LicenseManager implements ILicenseManager {

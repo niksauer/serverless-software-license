@@ -1,11 +1,17 @@
 import { ethers } from 'ethers';
+import { BigNumber } from 'ethers/utils';
+
+export interface ContractResponse {
+  txHash: string;
+}
 
 export enum LicenseTokenEvent {
-  LicensePurchased = 'LICENSE_PURCHASED',
+  LicensePurchased,
 }
 
 export type LicensePurchasedHandler = (
   address: string,
+  // tokenID: number,
   event: ethers.Event
 ) => void;
 
@@ -16,7 +22,9 @@ export type LicenseTokenEventHandler<
   : undefined;
 
 export interface ILicenseRegistry {
+  numberOfLicenses(address: string): Promise<number>;
   hasLicense(address: string): Promise<boolean>;
+  purchaseLicense(address: string, value: BigNumber): Promise<ContractResponse>;
   generatePurchaseTransaction(address: string): string;
   subscribe<Event extends LicenseTokenEvent>(
     event: Event,

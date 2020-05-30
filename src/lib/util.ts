@@ -1,4 +1,4 @@
-import { AddressOwnershipChallenge } from '../types/util';
+import { AddressOwnershipChallenge } from './interfaces/util';
 
 /**
  * Verifies the ownership of an Ethereum address by checking the signature of a challenge response
