@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Contract } from 'ethers';
 import {
   ILicenseRegistry,
@@ -5,6 +6,7 @@ import {
   LicenseTokenEvent,
 } from '../types/registry';
 import { Provider } from 'ethers/providers';
+import abi from '../abi/LicenseToken.json';
 
 export class LicenseRegistry implements ILicenseRegistry {
   // MARK: - Public Properties
@@ -13,13 +15,15 @@ export class LicenseRegistry implements ILicenseRegistry {
   private contract: Contract;
 
   // MARK: - Initialization
-  constructor(address: string, provider: Provider, abi?: any) {
-    this.contract = new Contract(address, [], provider);
+  constructor(address: string, provider: Provider) {
+    this.contract = new Contract(address, (abi as any)['abi'], provider);
   }
 
   // MARK: - Public Methods
-  hasLicense(address: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+  async hasLicense(address: string): Promise<boolean> {
+    const numberOfLicenses = await this.contract.balanceOf(address);
+
+    return numberOfLicenses >= 1;
   }
 
   generatePurchaseTransaction(address: string): string {
