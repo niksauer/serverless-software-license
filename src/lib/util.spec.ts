@@ -1,8 +1,8 @@
 import test from 'ava';
 import { verifyOwnership } from './util';
-import { AddressOwnershipChallenge } from '../types/util';
+import { AddressOwnershipChallenge } from './interfaces/util';
 
-test('verify ownership', (t) => {
+test('verifyOwnership() returns a boolean', (t) => {
   const challenge: AddressOwnershipChallenge = {
     address: '',
     data: '',
@@ -10,5 +10,5 @@ test('verify ownership', (t) => {
 
   const response = '';
 
-  t.true(verifyOwnership(challenge, response));
+  t.true(typeof verifyOwnership(challenge, response) == 'boolean');
 });

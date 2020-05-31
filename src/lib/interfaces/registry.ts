@@ -1,14 +1,13 @@
 import { ethers, BigNumber, UnsignedTransaction, Transaction } from 'ethers';
 
-export interface ContractResponse {
-  txHash: string;
-}
-
 export enum LicenseTokenEvent {
-  LicensePurchased,
+  All = '*',
+  LicensePurchased = 'LicensePurchased',
 }
 
-export type LicensePurchasedHandler = (
+export type LicenseRegistryEventHandler = (...args: []) => void;
+
+export type LicensePurchasedEventHandler = (
   address: string,
   // tokenID: number,
   event: ethers.Event
@@ -16,8 +15,10 @@ export type LicensePurchasedHandler = (
 
 export type LicenseTokenEventHandler<
   Event extends LicenseTokenEvent
-> = Event extends LicenseTokenEvent.LicensePurchased
-  ? LicensePurchasedHandler
+> = Event extends LicenseTokenEvent.All
+  ? LicenseRegistryEventHandler
+  : Event extends LicenseTokenEvent.LicensePurchased
+  ? LicensePurchasedEventHandler
   : undefined;
 
 export interface ILicenseRegistry {

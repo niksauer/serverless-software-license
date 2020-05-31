@@ -1,7 +1,7 @@
 import {
   ILicenseManager,
-  License,
   LicenseManagerEvent,
+  ILicenseStorage,
 } from './interfaces/manager';
 import { ILicenseRegistry } from './interfaces/registry';
 import { AddressOwnershipChallenge, EventEmitter } from './interfaces/util';
@@ -19,7 +19,7 @@ export class LicenseManager implements ILicenseManager {
 
   // MARK: - Private Properties
   private registry: ILicenseRegistry;
-  private path: string;
+  private storage: ILicenseStorage;
 
   private _isValid = false;
   private _emitter: EventEmitter;
@@ -27,9 +27,9 @@ export class LicenseManager implements ILicenseManager {
   private activeChallenge?: AddressOwnershipChallenge;
 
   // MARK: - Initialization
-  constructor(registry: ILicenseRegistry, path: string) {
+  constructor(registry: ILicenseRegistry, storage: ILicenseStorage) {
     this.registry = registry;
-    this.path = path;
+    this.storage = storage;
 
     this._emitter = new Events.EventEmitter();
   }
@@ -58,13 +58,5 @@ export class LicenseManager implements ILicenseManager {
   private setIsValid(value: boolean) {
     this.setIsValid(value);
     this.emitter.emit(LicenseManagerEvent.LicenseValidityChanged, value);
-  }
-
-  private async readLicense(): Promise<License> {
-    throw new Error('Method not implemented.');
-  }
-
-  private async writeLicense(license: License): Promise<void> {
-    throw new Error('Method not implemented.');
   }
 }

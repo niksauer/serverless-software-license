@@ -5,7 +5,12 @@ export interface License {
 }
 
 export enum LicenseManagerEvent {
-  LicenseValidityChanged = 'LICENSE_VALIDITY_CHANGED',
+  LicenseValidityChanged = 'LicenseValidityChanged',
+}
+
+export interface ILicenseStorage {
+  getLicense(): Promise<License>;
+  setLicense(license: License): void;
 }
 
 export interface ILicenseManager {

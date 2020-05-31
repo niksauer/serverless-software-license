@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
   Contract,
   Signer,
@@ -12,51 +11,53 @@ import {
   LicenseTokenEventHandler,
   LicenseTokenEvent,
 } from './interfaces/registry';
-import abi from '../abi/LicenseToken.json';
+import LicenseToken from '../abi/LicenseToken.json';
 
 export class LicenseRegistry implements ILicenseRegistry {
   // MARK: - Public Properties
   get licensePrice(): BigNumber {
-    return this.contract.LICENSE_PRICE();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    return this.contract.LICENSE_PRICE() as BigNumber;
   }
 
   // MARK: - Private Properties
   private contract: Contract;
-  private provider: providers.Provider | undefined;
+  // private provider: providers.Provider | undefined;
 
   // MARK: - Initialization
   constructor(address: string, signerOrProvider: Signer | providers.Provider) {
-    if (signerOrProvider instanceof Signer) {
-      this.provider = signerOrProvider.provider;
-    } else {
-      this.provider = signerOrProvider;
-    }
+    // if (signerOrProvider instanceof Signer) {
+    //   this.provider = signerOrProvider.provider;
+    // } else {
+    //   this.provider = signerOrProvider;
+    // }
 
     this.contract = new Contract(
       address,
-      (abi as any)['abi'],
+      LicenseToken['abi'],
       signerOrProvider
     );
   }
 
   // MARK: - Public Methods
   async numberOfLicenses(address: string): Promise<number> {
-    const count: BigNumber = await this.contract.balanceOf(address);
-
-    return count.toNumber();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    return ((await this.contract.balanceOf(address)) as BigNumber).toNumber();
   }
 
   async hasLicense(address: string): Promise<boolean> {
     return (await this.numberOfLicenses(address)) >= 1;
   }
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   async purchaseLicense(
     address: string,
     value?: BigNumber
   ): Promise<Transaction> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     return this.contract.purchaseLicense(address, {
       value: value ?? this.licensePrice,
-    });
+    }) as Transaction;
   }
 
   async generatePurchaseTransaction(
@@ -72,7 +73,7 @@ export class LicenseRegistry implements ILicenseRegistry {
     event: Event,
     handler: LicenseTokenEventHandler<Event>
   ): void {
-    this.contract.on(LicenseTokenEvent[event], handler);
+    this.contract.on(event, handler);
   }
 
   // MARK: - Private Methods
