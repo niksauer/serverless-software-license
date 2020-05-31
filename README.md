@@ -1,4 +1,6 @@
-This project was bootstraped through https://github.com/bitjson/typescript-starter.
+# Serverless Software License
+
+This project was bootstraped through https://github.com/niksauer/typescript-library-starter.
 
 ### Prerequisites
 
