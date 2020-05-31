@@ -16,6 +16,8 @@ test.beforeEach(async (t) => {
     deployerAddress: environment.deployerAddress,
     deployerSigner: environment.deployerSigner,
     contractAddress: environment.contractAddress,
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    getSigner: environment.getSigner,
   };
 });
 

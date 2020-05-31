@@ -8,6 +8,7 @@ export interface TestEnvironment {
   deployerAddress: string;
   deployerSigner: ethers.Signer;
   contractAddress: string;
+  getSigner(address: string): ethers.Signer;
 }
 
 async function deployContract(
@@ -58,6 +59,7 @@ export async function setupTestEnvironment(): Promise<TestEnvironment> {
     deployerAddress,
     deployerSigner,
     contractAddress,
+    getSigner: (address: string): ethers.Signer => provider.getSigner(address),
   };
 }
 

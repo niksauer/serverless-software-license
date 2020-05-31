@@ -15,6 +15,9 @@ import LicenseToken from '../abi/LicenseToken.json';
 
 export class LicenseRegistry implements ILicenseRegistry {
   // MARK: - Public Properties
+  /**
+   * Price of a single license as recorded in the smart-contract
+   */
   get licensePrice(): BigNumber {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     return this.contract.LICENSE_PRICE() as BigNumber;
@@ -40,15 +43,34 @@ export class LicenseRegistry implements ILicenseRegistry {
   }
 
   // MARK: - Public Methods
+  /**
+   *
+   * @param address Address to be queried
+   *
+   * @returns Number of licenses owned by the address
+   */
   async numberOfLicenses(address: string): Promise<number> {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     return ((await this.contract.balanceOf(address)) as BigNumber).toNumber();
   }
 
+  /**
+   *
+   * @param address Address to be queried
+   *
+   * @returns True if the address owns at least one license
+   */
   async hasLicense(address: string): Promise<boolean> {
     return (await this.numberOfLicenses(address)) >= 1;
   }
 
+  /**
+   * Purchases a new license. By default, the current price will be auto-filled,
+   * though may be overriden as a tip to the developer.
+   *
+   * @param address Address to be set as the license owner
+   * @param value Amount of wei to pay for a license
+   */
   // eslint-disable-next-line @typescript-eslint/require-await
   async purchaseLicense(
     address: string,
@@ -60,6 +82,15 @@ export class LicenseRegistry implements ILicenseRegistry {
     }) as Transaction;
   }
 
+  /**
+   * Populates a license purchase transaction that must be broadcasted manually.
+   * Like 'purchaseLicense', the price will be auto-set, though may be overriden.
+   *
+   * @param address Address to be set as the license owner
+   * @param value Amount of wei to pay for a license
+   *
+   * @returns Unsigned transaction to be relayed
+   */
   async generatePurchaseTransaction(
     address: string,
     value?: BigNumber
@@ -69,6 +100,12 @@ export class LicenseRegistry implements ILicenseRegistry {
     });
   }
 
+  /**
+   * Sets a listener that will be called for each contract event.
+   *
+   * @param event Events to be considered
+   * @param handler Callback to be run for each event
+   */
   subscribe<Event extends LicenseTokenEvent>(
     event: Event,
     handler: LicenseTokenEventHandler<Event>
