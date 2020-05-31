@@ -1,5 +1,4 @@
-import { ethers } from 'ethers';
-import { BigNumber } from 'ethers/utils';
+import { ethers, BigNumber, UnsignedTransaction, Transaction } from 'ethers';
 
 export interface ContractResponse {
   txHash: string;
@@ -24,8 +23,11 @@ export type LicenseTokenEventHandler<
 export interface ILicenseRegistry {
   numberOfLicenses(address: string): Promise<number>;
   hasLicense(address: string): Promise<boolean>;
-  purchaseLicense(address: string, value: BigNumber): Promise<ContractResponse>;
-  generatePurchaseTransaction(address: string): string;
+  purchaseLicense(address: string, value: BigNumber): Promise<Transaction>;
+  generatePurchaseTransaction(
+    address: string,
+    value: BigNumber
+  ): Promise<UnsignedTransaction>;
   subscribe<Event extends LicenseTokenEvent>(
     event: Event,
     handler: LicenseTokenEventHandler<Event>

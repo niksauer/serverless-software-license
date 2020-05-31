@@ -3,7 +3,7 @@ import { LicenseRegistry } from './LicenseRegistry';
 import { ethers } from 'ethers';
 import { LicenseTokenEvent } from './interfaces/registry';
 
-const contractAddress = '0x688B84D9743bc109b6A8ac10ac4B8805A2187fA3';
+const contractAddress = '0xF3762058d77d3d5929127af3E5492920D27Ac0c2';
 const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
 const deployerAddress = '0x41c1c3d1F21a46aB84E4535167044676c30875BE';
 const deployerKey =
@@ -46,6 +46,19 @@ test.serial(
   }
 );
 
+test.serial('purchaseLicense() can auto fill the license value', async (t) => {
+  const address = deployerAddress;
+  const signer = deployerWallet;
+
+  const registry = new LicenseRegistry(contractAddress, signer);
+
+  const oldBalance = await registry.numberOfLicenses(address);
+  await registry.purchaseLicense(deployerAddress);
+  const newBalance = await registry.numberOfLicenses(address);
+
+  t.deepEqual(newBalance, oldBalance + 1);
+});
+
 test.serial(
   'purchaseLicense() fails when provided with wrong Ether amount',
   async (t) => {
@@ -71,4 +84,21 @@ test.serial('subscribe() notifies on LicensePurchased event', async (t) => {
   });
 
   await registry.purchaseLicense(deployerAddress, txValue);
+});
+
+test('generatePurchaseTransaction() creates an unsigned contract transaction', async (t) => {
+  const address = deployerAddress;
+  const signer = deployerWallet;
+  const txValue = licensePrice;
+
+  const registry = new LicenseRegistry(contractAddress, signer);
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const unsignedTransaction = await registry.generatePurchaseTransaction(
+    address,
+    txValue
+  );
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  t.true(unsignedTransaction.data != undefined);
 });

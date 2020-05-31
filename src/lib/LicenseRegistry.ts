@@ -1,26 +1,33 @@
 /* eslint-disable */
-import { Contract, Signer } from 'ethers';
+import {
+  Contract,
+  Signer,
+  providers,
+  BigNumber,
+  Transaction,
+  UnsignedTransaction,
+} from 'ethers';
 import {
   ILicenseRegistry,
   LicenseTokenEventHandler,
   LicenseTokenEvent,
-  ContractResponse,
 } from './interfaces/registry';
-import { Provider } from 'ethers/providers';
 import abi from '../abi/LicenseToken.json';
-import { Transaction, BigNumber } from 'ethers/utils';
 
 export class LicenseRegistry implements ILicenseRegistry {
   // MARK: - Public Properties
+  get licensePrice(): BigNumber {
+    return this.contract.LICENSE_PRICE();
+  }
 
   // MARK: - Private Properties
   private contract: Contract;
-  private provider: Provider;
+  private provider: providers.Provider | undefined;
 
   // MARK: - Initialization
-  constructor(address: string, signerOrProvider: Signer | Provider) {
+  constructor(address: string, signerOrProvider: Signer | providers.Provider) {
     if (signerOrProvider instanceof Signer) {
-      this.provider = signerOrProvider.provider!;
+      this.provider = signerOrProvider.provider;
     } else {
       this.provider = signerOrProvider;
     }
@@ -45,26 +52,27 @@ export class LicenseRegistry implements ILicenseRegistry {
 
   async purchaseLicense(
     address: string,
-    value: BigNumber
-  ): Promise<ContractResponse> {
-    const tx: Transaction = await this.contract.purchaseLicense(address, {
-      value: value,
+    value?: BigNumber
+  ): Promise<Transaction> {
+    return this.contract.purchaseLicense(address, {
+      value: value ?? this.licensePrice,
     });
-
-    return {
-      txHash: tx.hash!,
-    };
   }
 
-  generatePurchaseTransaction(address: string): string {
-    throw new Error('Method not implemented.');
+  async generatePurchaseTransaction(
+    address: string,
+    value?: BigNumber
+  ): Promise<UnsignedTransaction> {
+    return this.contract.populateTransaction['purchaseLicense'](address, {
+      value: value ?? this.licensePrice,
+    });
   }
 
   subscribe<Event extends LicenseTokenEvent>(
     event: Event,
     handler: LicenseTokenEventHandler<Event>
   ): void {
-    this.contract.addListener(LicenseTokenEvent[event], handler);
+    this.contract.on(LicenseTokenEvent[event], handler);
   }
 
   // MARK: - Private Methods
