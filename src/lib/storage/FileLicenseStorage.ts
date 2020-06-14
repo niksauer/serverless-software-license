@@ -14,23 +14,26 @@ export class FileLicenseStorage implements ILicenseStorage {
 
     async getLicense(): Promise<License> {
 
-        try {
-            const licenseString: string = fs.readFileSync(this.path).toString();
-            const license = await JSON.parse(licenseString);
-            if (license == null || license.response == null)
-                throw new Error("The disk contents don't match a License.");
-            return license;
-        } catch (e) {
-            throw e;
-        }
+        const readFileAsync = promisify(fs.readFile);
+        const data = (await readFileAsync(this.path)).toString();
+        const license = JSON.parse(data);
+        if (license == null || license.response == null)
+            throw new Error("The disk contents don't match a License.");
+        return license;
     }
 
     //TODO implement method
     setLicense(license: License): void {
+
         if (license.challenge == null || license.challenge.response == null) {
             throw new Error("The contents to be written don't match a License!");
         }
 
-        const licenseString = JSON.stringify(license);
+        try {
+
+            const licenseString = JSON.stringify(license);
+        } catch (e) {
+            const data = JSON.stringify()
+        }
     }
 }
