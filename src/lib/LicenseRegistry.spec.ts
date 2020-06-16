@@ -1,10 +1,6 @@
 import test from 'ava';
 import { LicenseRegistry } from './LicenseRegistry';
-import {
-  setupTestEnvironment,
-  TestEnvironment,
-  advanceBlock,
-} from './test-util';
+import { setupTestEnvironment, TestEnvironment } from './test-util';
 import { ethers } from 'ethers';
 
 test.beforeEach(async (t) => {
