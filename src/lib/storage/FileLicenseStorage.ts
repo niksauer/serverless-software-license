@@ -1,12 +1,11 @@
-import { ILicenseStorage, License } from "../interfaces/manager";
-import fs from "fs";
-import { promisify } from "util";
+import { ILicenseStorage, License } from '../interfaces/manager';
+import fs from 'fs';
+import { promisify } from 'util';
 
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
 export class FileLicenseStorage implements ILicenseStorage {
-
   // MARK: - Public Properties
   path: string;
 
@@ -21,7 +20,7 @@ export class FileLicenseStorage implements ILicenseStorage {
    */
   async getLicense(): Promise<License> {
     const data = (await readFileAsync(this.path)).toString();
-    const license: License = JSON.parse(data);
+    const license = JSON.parse(data) as License;
 
     if (!this.isLicense(license)) {
       throw new Error("The disk contents don't match a License.");
@@ -49,6 +48,10 @@ export class FileLicenseStorage implements ILicenseStorage {
    * @returns true if given license has all necessary fields set.
    */
   private isLicense(license: License): boolean {
-    return (typeof license.challenge.address == "string" && license.challenge.data == "string" && license.challenge.response == "string");
+    return (
+      typeof license.challenge.address == 'string' &&
+      license.challenge.data == 'string' &&
+      license.challenge.response == 'string'
+    );
   }
 }
