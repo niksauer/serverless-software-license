@@ -78,7 +78,7 @@ export class LicenseRegistry implements ILicenseRegistry {
   ): Promise<Transaction> {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     return this.contract.purchaseLicense(address, {
-      value: value ?? this.licensePrice,
+      value: value != undefined ? value : this.licensePrice,
     }) as Transaction;
   }
 
@@ -96,7 +96,7 @@ export class LicenseRegistry implements ILicenseRegistry {
     value?: BigNumber
   ): Promise<UnsignedTransaction> {
     return this.contract.populateTransaction['purchaseLicense'](address, {
-      value: value ?? this.licensePrice,
+      value: value != undefined ? value : this.licensePrice,
     });
   }
 
