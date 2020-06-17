@@ -1,6 +1,6 @@
 import test from 'ava';
 import { FileLicenseStorage } from './FileLicenseStorage';
-import { ILicenseStorage, License } from '../interfaces/manager';
+// import { ILicenseStorage, License } from '../interfaces/manager';
 
 //const validLicenseStorage2 = new FileLicenseStorage(process.cwd() + "/test-data/validLicense2.json");
 //const invalidLicenseStorage = new FileLicenseStorage(process.cwd() + "/../invalidLicense.json");
@@ -9,6 +9,7 @@ test("getLicense() fails if disk contents don't match a license", async (t) => {
   const licenseStorage = new FileLicenseStorage(
     './test-data/invalidLicense.json'
   );
+
   await t.throwsAsync(licenseStorage.getLicense());
 });
 

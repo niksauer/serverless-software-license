@@ -53,8 +53,6 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.0.1",
-    "@types/node": "^14.0.13",
-    "scrypt": "^6.0.3"
     "ethers": "^5.0.2"
   },
   "devDependencies": {
