@@ -47,11 +47,31 @@ export class FileLicenseStorage implements ILicenseStorage {
    * @param license
    * @returns true if given license has all necessary fields set.
    */
-  private isLicense(license: License): boolean {
+  private isLicense(value: unknown): value is License {
+    if (typeof value != 'object' || !value) {
+      return false;
+    }
+
+    const license = value as { [index: string]: string };
+
+    if (!('challenge' in license) || typeof license['challenge'] != 'object') {
+      return false;
+    }
+
+    const challenge = license['challenge'] as { [index: string]: string };
+
+    if (
+      !('address' in challenge) ||
+      !('data' in challenge) ||
+      !('response' in challenge)
+    ) {
+      return false;
+    }
+
     return (
-      typeof license.challenge.address == 'string' &&
-      license.challenge.data == 'string' &&
-      license.challenge.response == 'string'
+      typeof challenge.address == 'string' &&
+      typeof challenge.data == 'string' &&
+      typeof challenge.response == 'string'
     );
   }
 }
