@@ -38,10 +38,27 @@ test.serial(
   }
 );
 
-// test.serial(
-//   'getLicense() does not fail if disk content match a license',
-//   async (t) => {}
-// );
+test.serial(
+  'getLicense() does not fail if disk content match a license',
+  async (t) => {
+    const validLicense = ({
+      challenge: {
+        address: '22',
+        data: 'testData',
+        response: '22',
+      },
+    } as unknown) as License;
+
+    mockFs({
+      [storagePath]: JSON.stringify(validLicense),
+    });
+
+    const storage = new FileLicenseStorage(storagePath);
+
+    const storedLicense = await storage.getLicense();
+    t.deepEqual(storedLicense, validLicense);
+  }
+);
 
 test.serial(
   "setLicense() fails if the contents to be written don't match a license.",
@@ -59,7 +76,7 @@ test.serial(
 test.serial(
   'setLicense() does not fail if the contents to be written match a license',
   async (t) => {
-    const validlicense: License = {
+    const validLicense: License = {
       challenge: {
         address: '0x',
         data: 'hell',
@@ -71,11 +88,11 @@ test.serial(
 
     const storage = new FileLicenseStorage(storagePath);
 
-    await t.notThrowsAsync(storage.setLicense(validlicense));
+    await t.notThrowsAsync(storage.setLicense(validLicense));
 
     const storedLicense = fs.readFileSync(storagePath).toString();
     const parsedLicense = JSON.parse(storedLicense) as unknown;
 
-    t.deepEqual(parsedLicense, validlicense);
+    t.deepEqual(parsedLicense, validLicense);
   }
 );
