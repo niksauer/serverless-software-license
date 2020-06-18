@@ -37,11 +37,14 @@ async function deployContract(
   return contract.address;
 }
 
-export async function setupTestEnvironment(): Promise<TestEnvironment> {
+export async function setupTestEnvironment(
+  mnemonic?: string
+): Promise<TestEnvironment> {
   const blockchain = Ganache.provider({
     total_accounts: 3,
     default_balance_ether: 100,
     // blockTime: 5, // mine a block every two seconds in order to flush event listeners
+    mnemonic: mnemonic,
   });
 
   const provider = new providers.Web3Provider(blockchain as any);
