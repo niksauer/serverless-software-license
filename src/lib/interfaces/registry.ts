@@ -28,7 +28,7 @@ export interface ILicenseRegistry {
   purchaseLicense(address: string, value: BigNumber): Promise<Transaction>;
   generatePurchaseTransaction(
     address: string,
-    value: BigNumber
+    value?: BigNumber
   ): Promise<UnsignedTransaction>;
   subscribe<Event extends LicenseTokenEvent>(
     event: Event,
