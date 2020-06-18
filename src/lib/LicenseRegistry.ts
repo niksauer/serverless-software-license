@@ -15,13 +15,6 @@ import LicenseToken from '../abi/LicenseToken.json';
 
 export class LicenseRegistry implements ILicenseRegistry {
   // MARK: - Public Properties
-  /**
-   * Price of a single license as recorded in the smart-contract
-   */
-  get licensePrice(): BigNumber {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    return this.contract.LICENSE_PRICE() as BigNumber;
-  }
 
   // MARK: - Private Properties
   private contract: Contract;
@@ -43,6 +36,14 @@ export class LicenseRegistry implements ILicenseRegistry {
   }
 
   // MARK: - Public Methods
+  /**
+   * Price of a single license as recorded in the smart-contract
+   */
+  licensePrice(): Promise<BigNumber> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    return this.contract.LICENSE_PRICE() as Promise<BigNumber>;
+  }
+
   /**
    *
    * @param address Address to be queried
@@ -78,7 +79,7 @@ export class LicenseRegistry implements ILicenseRegistry {
   ): Promise<Transaction> {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     return this.contract.purchaseLicense(address, {
-      value: value != undefined ? value : this.licensePrice,
+      value: value != undefined ? value : await this.licensePrice(),
     }) as Transaction;
   }
 
@@ -96,7 +97,7 @@ export class LicenseRegistry implements ILicenseRegistry {
     value?: BigNumber
   ): Promise<UnsignedTransaction> {
     return this.contract.populateTransaction['purchaseLicense'](address, {
-      value: value != undefined ? value : this.licensePrice,
+      value: value != undefined ? value : await this.licensePrice(),
     });
   }
 

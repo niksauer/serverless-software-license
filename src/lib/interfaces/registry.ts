@@ -22,7 +22,7 @@ export type LicenseTokenEventHandler<
   : undefined;
 
 export interface ILicenseRegistry {
-  licensePrice: BigNumber;
+  licensePrice(): Promise<BigNumber>;
   numberOfLicenses(address: string): Promise<number>;
   hasLicense(address: string): Promise<boolean>;
   purchaseLicense(address: string, value: BigNumber): Promise<Transaction>;
