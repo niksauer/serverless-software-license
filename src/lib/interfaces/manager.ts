@@ -16,11 +16,15 @@ export interface ILicenseStorage {
 export interface ILicenseManager {
   readonly isValid: boolean;
   readonly emitter: EventEmitter;
-  startRegistration(address: string): string;
-  completeRegistration(challengeResponse: string): Promise<void>;
-  register(
+
+  activate(
     challenge: AddressOwnershipChallenge,
     response: string
   ): Promise<void>;
+
+  startActivation(address: string): string;
+  completeActivation(challengeResponse: string): Promise<void>;
+  stopActivation(): void;
+
   checkValidity(): Promise<void>;
 }
