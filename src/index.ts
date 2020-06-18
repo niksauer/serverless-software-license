@@ -18,4 +18,4 @@ export {
 
 export { AddressOwnershipChallenge } from './lib/interfaces/util';
 
-export { setupTestEnvironment } from './lib/test-util';
+export { setupTestEnvironment, TestEnvironment } from './lib/test-util';
