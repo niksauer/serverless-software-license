@@ -20,11 +20,11 @@ export interface ILicenseManager {
   activate(
     challenge: AddressOwnershipChallenge,
     response: string
-  ): Promise<void>;
+  ): Promise<boolean>;
 
   startActivation(address: string): string;
-  completeActivation(challengeResponse: string): Promise<void>;
+  completeActivation(challengeResponse: string): Promise<boolean>;
   stopActivation(): void;
 
-  checkValidity(): Promise<void>;
+  checkValidity(): Promise<boolean>;
 }

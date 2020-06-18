@@ -22,6 +22,7 @@ export class LicenseManager implements ILicenseManager {
   private storage: ILicenseStorage;
 
   private _isValid = false;
+
   private _emitter: EventEmitter;
 
   private activeChallenge?: AddressOwnershipChallenge;
@@ -38,7 +39,7 @@ export class LicenseManager implements ILicenseManager {
   activate(
     challenge: AddressOwnershipChallenge,
     response: string
-  ): Promise<void> {
+  ): Promise<boolean> {
     throw new Error('Method not implemented.');
   }
 
@@ -46,7 +47,7 @@ export class LicenseManager implements ILicenseManager {
     throw new Error('Method not implemented.');
   }
 
-  completeActivation(challengeResponse: string): Promise<void> {
+  completeActivation(challengeResponse: string): Promise<boolean> {
     throw new Error('Method not implemented.');
   }
 
@@ -54,13 +55,15 @@ export class LicenseManager implements ILicenseManager {
     throw new Error('Method not implemented.');
   }
 
-  checkValidity(): Promise<void> {
+  checkValidity(): Promise<boolean> {
     throw new Error('Method not implemented.');
   }
 
   // MARK: - Private Methods
-  private setIsValid(value: boolean) {
+  private setIsValid(value: boolean): boolean {
     this.setIsValid(value);
     this.emitter.emit(LicenseManagerEvent.LicenseValidityChanged, value);
+
+    return value;
   }
 }
