@@ -16,9 +16,9 @@ export interface ILicenseStorage {
 export interface ILicenseManager {
   readonly isValid: boolean;
   readonly emitter: EventEmitter;
-  startRegistration(address: string): string;
-  completeRegistration(challengeResponse: string): Promise<void>;
-  register(
+  startActivation(address: string): string;
+  completeActivation(challengeResponse: string): Promise<void>;
+  activate(
     challenge: AddressOwnershipChallenge,
     response: string
   ): Promise<void>;

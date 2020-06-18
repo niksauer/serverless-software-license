@@ -35,15 +35,15 @@ export class LicenseManager implements ILicenseManager {
   }
 
   // MARK: - Public Methods
-  startRegistration(address: string): string {
+  startActivation(address: string): string {
     throw new Error('Method not implemented.');
   }
 
-  completeRegistration(challengeResponse: string): Promise<void> {
+  completeActivation(challengeResponse: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-  register(
+  activate(
     challenge: AddressOwnershipChallenge,
     response: string
   ): Promise<void> {
