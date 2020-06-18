@@ -4,12 +4,14 @@ export * from './lib/util';
 export * from './lib/storage/FileLicenseStorage';
 
 export {
+  ILicenseManager,
   License,
   LicenseManagerEvent,
   ILicenseStorage,
 } from './lib/interfaces/manager';
 
 export {
+  ILicenseRegistry,
   LicenseTokenEvent,
   LicenseTokenEventHandler,
 } from './lib/interfaces/registry';
