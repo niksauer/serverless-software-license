@@ -59,6 +59,7 @@
     "@bitjson/npm-scripts-info": "^1.0.0",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/mock-fs": "^4.10.0",
+    "@types/react": "^16.9.38",
     "@types/web3": "1.0.19",
     "@typescript-eslint/eslint-plugin": "^3.0.1-alpha.13",
     "@typescript-eslint/parser": "^3.0.1-alpha.13",
@@ -105,5 +106,8 @@
     "exclude": [
       "**/*.spec.js"
     ]
+  },
+  "peerDependencies": {
+    "react": "^16.13.1"
   }
 }
