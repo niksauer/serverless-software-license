@@ -35,6 +35,13 @@ export class LicenseManager implements ILicenseManager {
   }
 
   // MARK: - Public Methods
+  activate(
+    challenge: AddressOwnershipChallenge,
+    response: string
+  ): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+
   startActivation(address: string): string {
     throw new Error('Method not implemented.');
   }
@@ -43,10 +50,7 @@ export class LicenseManager implements ILicenseManager {
     throw new Error('Method not implemented.');
   }
 
-  activate(
-    challenge: AddressOwnershipChallenge,
-    response: string
-  ): Promise<void> {
+  stopActivation(): void {
     throw new Error('Method not implemented.');
   }
 
