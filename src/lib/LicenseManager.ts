@@ -23,6 +23,7 @@ export class LicenseManager implements ILicenseManager {
   private storage: ILicenseStorage;
 
   private _isValid = false;
+
   private _emitter: EventEmitter;
 
   private activeChallenge?: AddressOwnershipChallenge;
@@ -39,7 +40,7 @@ export class LicenseManager implements ILicenseManager {
   activate(
     challenge: AddressOwnershipChallenge,
     response: string
-  ): Promise<void> {
+  ): Promise<boolean> {
     throw new Error('Method not implemented.');
   }
 
@@ -47,7 +48,7 @@ export class LicenseManager implements ILicenseManager {
     throw new Error('Method not implemented.');
   }
 
-  completeActivation(challengeResponse: string): Promise<void> {
+  completeActivation(challengeResponse: string): Promise<boolean> {
     throw new Error('Method not implemented.');
   }
 
@@ -55,7 +56,7 @@ export class LicenseManager implements ILicenseManager {
     throw new Error('Method not implemented.');
   }
 
-  async checkValidity(): Promise<void> {
+  async checkValidity(): Promise<boolean> {
     const license = await this.storage.getLicense();
 
     const challenge = license.challenge;
@@ -65,23 +66,23 @@ export class LicenseManager implements ILicenseManager {
     const ownsAddress = verifyOwnership(challenge, response);
 
     if (!ownsAddress) {
-      this.setIsValid(false);
-      return;
+      return this.setIsValid(false);
     }
 
     const ownsLicense = await this.registry.hasLicense(address);
 
     if (!ownsLicense) {
-      this.setIsValid(false);
-      return;
+      return this.setIsValid(false);
     }
 
-    this.setIsValid(true);
+    return this.setIsValid(true);
   }
 
   // MARK: - Private Methods
-  private setIsValid(value: boolean) {
+  private setIsValid(value: boolean): boolean {
     this._isValid = value;
     this.emitter.emit(LicenseManagerEvent.LicenseValidityChanged, value);
+
+    return value;
   }
 }
