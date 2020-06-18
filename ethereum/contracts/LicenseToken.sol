@@ -5,6 +5,7 @@ import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 // import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 
+
 // https://docs.openzeppelin.com/contracts/3.x/erc20
 contract LicenseToken is ERC20, Ownable {
     // MARK: - Events
@@ -25,7 +26,7 @@ contract LicenseToken is ERC20, Ownable {
     // MARK: - Public Methods
     function purchaseLicense(address owner) public payable {
         require(owner != address(0), 'INVALID_OWNER_ADDRESS');
-        require(msg.value < LICENSE_PRICE, 'INSUFFICIENT_FUNDS');
+        require(msg.value >= LICENSE_PRICE, 'INSUFFICIENT_FUNDS');
 
         _mint(owner, 1);
 
