@@ -6,6 +6,7 @@ import {
 import { ILicenseRegistry } from './interfaces/registry';
 import { AddressOwnershipChallenge, EventEmitter } from './interfaces/util';
 import Events from 'events';
+import { getRandomData } from './util';
 
 export class LicenseManager implements ILicenseManager {
   // MARK: - Public Properties
@@ -44,7 +45,11 @@ export class LicenseManager implements ILicenseManager {
   }
 
   startActivation(address: string): string {
-    throw new Error('Method not implemented.');
+    const data = getRandomData(32);
+
+    this.activeChallenge = { address, data };
+
+    return data;
   }
 
   completeActivation(challengeResponse: string): Promise<boolean> {
