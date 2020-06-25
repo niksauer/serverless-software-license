@@ -96,3 +96,26 @@ test.serial(
     t.deepEqual(parsedLicense, validLicense);
   }
 );
+
+test.serial('removeLicense() fails if no license is stored', async (t) => {
+  mockFs();
+
+  const storage = new FileLicenseStorage(storagePath);
+
+  await t.throwsAsync(storage.removeLicense());
+});
+
+test.serial(
+  'removeLicense() does not fail if license file exists',
+  async (t) => {
+    mockFs({
+      [storagePath]: 'hello',
+    });
+
+    const storage = new FileLicenseStorage(storagePath);
+
+    await t.notThrowsAsync(storage.removeLicense());
+
+    t.false(fs.existsSync(storagePath));
+  }
+);

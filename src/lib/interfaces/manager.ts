@@ -11,6 +11,7 @@ export enum LicenseManagerEvent {
 export interface ILicenseStorage {
   getLicense(): Promise<License>;
   setLicense(license: License): Promise<void>;
+  removeLicense(): Promise<void>;
 }
 
 export interface ILicenseManager {

@@ -4,6 +4,7 @@ import { promisify } from 'util';
 
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
+const removeFileAsync = promisify(fs.unlink);
 
 export class FileLicenseStorage implements ILicenseStorage {
   // MARK: - Public Properties
@@ -39,6 +40,10 @@ export class FileLicenseStorage implements ILicenseStorage {
     }
 
     await writeFileAsync(this.path, JSON.stringify(license));
+  }
+
+  removeLicense(): Promise<void> {
+    return removeFileAsync(this.path);
   }
 
   // MARK: - Private Methods
