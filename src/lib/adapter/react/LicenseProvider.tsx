@@ -7,18 +7,21 @@ import {
   ILicenseStorage,
   LicenseRegistry,
   LicenseManager,
+  LicenseManagerEvent,
 } from '../../..';
 
 interface LicenseState {
   status: LoadStatus;
   isValid: boolean;
+  checkValidity: () => void;
+  reset: () => void;
   registry: ILicenseRegistry;
 }
 
 interface LicenseActivationState {
   activationStatus: LoadStatus;
   activate: (challenge: AddressOwnershipChallenge, response: string) => void;
-  startActivation: (address: string) => string;
+  startActivation: (address: string) => Promise<string>;
   completeActivation: (response: string) => void;
   stopActivation: () => void;
 }
@@ -28,26 +31,31 @@ const LicenseContext = React.createContext<
 >({
   status: LoadStatus.None,
   isValid: false,
+  checkValidity: () => null,
+  reset: () => null,
   registry: {} as ILicenseRegistry,
-
   activationStatus: LoadStatus.None,
   activate: () => null,
-  startActivation: () => '',
+  startActivation: () => Promise.resolve(''),
   completeActivation: () => null,
   stopActivation: () => null,
 });
 
 interface Props {
   storage: ILicenseStorage;
-  rpcHost: string;
+  provider: ethers.providers.Provider;
   contractAdddress: string;
+  signer?: ethers.Signer;
+  connectSigner?: boolean;
   children: React.ReactNode;
 }
 
 export const LicenseProvider: React.FC<Props> = ({
   storage,
-  rpcHost,
+  provider,
   contractAdddress,
+  signer,
+  connectSigner = false,
   children,
 }) => {
   // MARK: - License
@@ -62,28 +70,26 @@ export const LicenseProvider: React.FC<Props> = ({
     isValid: false,
   });
 
-  const provider = useMemo(
-    () => new ethers.providers.JsonRpcProvider(rpcHost),
-    []
-  );
-  const registry = useMemo(
-    () => new LicenseRegistry(contractAdddress, provider),
-    [provider]
-  );
+  const registry = useMemo(() => {
+    let providerOrSigner: ethers.providers.Provider | ethers.Signer = provider;
+
+    if (signer) {
+      if (connectSigner) {
+        providerOrSigner = signer.connect(provider);
+      } else {
+        providerOrSigner = signer;
+      }
+    }
+
+    return new LicenseRegistry(contractAdddress, providerOrSigner);
+  }, [provider]);
 
   const manager = useMemo(() => new LicenseManager(registry, storage), [
     registry,
     storage,
   ]);
 
-  useEffect(() => {
-    // manager.emitter.on(
-    //   LicenseManagerEvent.LicenseValidityChanged,
-    //   (isValid: boolean) => {
-    //     dispatch({ type: LoadActionType.End, payload: isValid });
-    //   }
-    // );
-
+  const checkValidity = useCallback(() => {
     dispatch({ type: LoadActionType.Begin });
 
     manager
@@ -92,11 +98,27 @@ export const LicenseProvider: React.FC<Props> = ({
         dispatch({ type: LoadActionType.End, payload: isLicenseValid })
       )
       .catch(() => dispatch({ type: LoadActionType.Fail }));
+  }, [manager, dispatch]);
 
-    // return () => {
-    //   manager.emitter.removeAllListeners();
-    // };
-  }, []);
+  const reset = useCallback(async () => {
+    await storage.removeLicense();
+    dispatch({ type: LoadActionType.End, payload: false });
+  }, [storage]);
+
+  useEffect(() => {
+    manager.emitter.on(
+      LicenseManagerEvent.LicenseValidityChanged,
+      (isValid: boolean) => {
+        dispatch({ type: LoadActionType.End, payload: isValid });
+      }
+    );
+
+    checkValidity();
+
+    return () => {
+      manager.emitter.removeAllListeners();
+    };
+  }, [manager]);
 
   // MARK: - Activation
   const activationStateReducer = reducer<boolean, {}>((isLicenseValid) => {
@@ -118,10 +140,10 @@ export const LicenseProvider: React.FC<Props> = ({
 
       manager
         .activate(challenge, response)
-        .then((isLicenseValid) =>
+        .then(() =>
           activationDispatch({
             type: LoadActionType.End,
-            payload: isLicenseValid,
+            payload: true,
           })
         )
         .catch(() => activationDispatch({ type: LoadActionType.Fail }));
@@ -140,25 +162,21 @@ export const LicenseProvider: React.FC<Props> = ({
     (challengeResponse: string) => {
       activationDispatch({ type: LoadActionType.Begin });
 
-      // try {
       manager
         .completeActivation(challengeResponse)
-        .then((isLicenseValid) =>
+        .then(() =>
           activationDispatch({
             type: LoadActionType.End,
-            payload: isLicenseValid,
+            payload: true,
           })
         )
         .catch(() => activationDispatch({ type: LoadActionType.Fail }));
-      // } catch {
-      //   activationDispatch({ type: LoadActionType.Fail });
-      // }
     },
     [manager]
   );
 
   const stopActivation = useCallback(() => {
-    // manager.stopActivation(); // not implemented
+    manager.stopActivation();
     activationDispatch({ type: LoadActionType.Reset });
   }, [manager]);
 
@@ -166,6 +184,8 @@ export const LicenseProvider: React.FC<Props> = ({
     <LicenseContext.Provider
       value={{
         ...state,
+        checkValidity,
+        reset,
         registry,
         activationStatus: activationState.status,
         activate,
