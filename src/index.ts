@@ -17,3 +17,5 @@ export {
 } from './lib/interfaces/registry';
 
 export { AddressOwnershipChallenge } from './lib/interfaces/util';
+
+export { setupTestEnvironment, TestEnvironment } from './lib/test-util';
