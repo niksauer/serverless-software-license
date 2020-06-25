@@ -39,18 +39,33 @@ export class LicenseManager implements ILicenseManager {
   }
 
   // MARK: - Public Methods
-  activate(
+  async activate(
     challenge: AddressOwnershipChallenge,
     response: string
-  ): Promise<boolean> {
-    throw new Error('Method not implemented.');
-  }
-
-  async startActivation(address: string): Promise<string> {
-    if (!(await this.registry.hasLicense(address))) {
+  ): Promise<void> {
+    if (!(await this.registry.hasLicense(challenge.address))) {
       throw new Error('Address does not have a license');
     }
 
+    const ownsAddress = verifyOwnership(challenge, response);
+
+    if (!ownsAddress) {
+      throw new Error('Address ownership challenge failed');
+    }
+
+    const license: License = {
+      challenge: {
+        ...challenge,
+        response: response,
+      },
+    };
+
+    await this.storage.setLicense(license);
+    this.setIsValid(true);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async startActivation(address: string): Promise<string> {
     const data = getRandomData(32);
 
     this.activeChallenge = { address, data };
@@ -63,29 +78,13 @@ export class LicenseManager implements ILicenseManager {
       throw new Error('No pending activation');
     }
 
-    const ownsAddress = verifyOwnership(
-      this.activeChallenge,
-      challengeResponse
-    );
+    await this.activate(this.activeChallenge, challengeResponse);
 
-    if (!ownsAddress) {
-      throw new Error('Address ownership challenge failed');
-    }
-
-    const license: License = {
-      challenge: {
-        ...this.activeChallenge,
-        response: challengeResponse,
-      },
-    };
-
-    await this.storage.setLicense(license);
     this.activeChallenge = undefined;
-    this.setIsValid(true);
   }
 
   stopActivation(): void {
-    throw new Error('Method not implemented.');
+    this.activeChallenge = undefined;
   }
 
   async checkValidity(): Promise<boolean> {
