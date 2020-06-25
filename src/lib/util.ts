@@ -38,5 +38,5 @@ export async function relayTransaction(
 }
 
 export function getRandomData(size: number): string {
-  return crypto.randomBytes(size).toString();
+  return crypto.randomBytes(size).toString('hex');
 }
