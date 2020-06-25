@@ -23,7 +23,7 @@ export interface ILicenseManager {
   ): Promise<boolean>;
 
   startActivation(address: string): Promise<string>;
-  completeActivation(challengeResponse: string): Promise<boolean>;
+  completeActivation(challengeResponse: string): Promise<void>;
   stopActivation(): void;
 
   checkValidity(): Promise<boolean>;

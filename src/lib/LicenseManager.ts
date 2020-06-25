@@ -2,6 +2,7 @@ import {
   ILicenseManager,
   LicenseManagerEvent,
   ILicenseStorage,
+  License,
 } from './interfaces/manager';
 import { ILicenseRegistry } from './interfaces/registry';
 import { AddressOwnershipChallenge, EventEmitter } from './interfaces/util';
@@ -57,8 +58,30 @@ export class LicenseManager implements ILicenseManager {
     return data;
   }
 
-  completeActivation(challengeResponse: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+  async completeActivation(challengeResponse: string): Promise<void> {
+    if (!this.activeChallenge) {
+      throw new Error('No pending activation');
+    }
+
+    const ownsAddress = verifyOwnership(
+      this.activeChallenge,
+      challengeResponse
+    );
+
+    if (!ownsAddress) {
+      throw new Error('Address ownership challenge failed');
+    }
+
+    const license: License = {
+      challenge: {
+        ...this.activeChallenge,
+        response: challengeResponse,
+      },
+    };
+
+    await this.storage.setLicense(license);
+    this.activeChallenge = undefined;
+    this.setIsValid(true);
   }
 
   stopActivation(): void {
