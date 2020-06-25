@@ -137,28 +137,8 @@ test("checkValidity() returns true if license's address ownership challenge pass
   t.true(manager.isValid);
 });
 
-test("startActivation() throws if address doesn't have a license acccording to registry", async (t) => {
-  const registry = {
-    hasLicense: (address: string) => Promise.resolve(false),
-  } as ILicenseRegistry;
-
-  const storage = {} as ILicenseStorage;
-
-  const manager = new LicenseManager(registry, storage);
-  const address = 'test';
-
-  try {
-    await manager.startActivation(address);
-  } catch (error) {
-    t.deepEqual((error as Error).message, 'Address does not have a license');
-  }
-});
-
-test('startActivation() sets active challenge and returns a string if address has a license according to registry', async (t) => {
-  const registry = {
-    hasLicense: (address: string) => Promise.resolve(true),
-  } as ILicenseRegistry;
-
+test('startActivation() sets active challenge and returns a string', async (t) => {
+  const registry = {} as ILicenseRegistry;
   const storage = {} as ILicenseStorage;
 
   const manager = new LicenseManager(registry, storage);
@@ -187,6 +167,24 @@ test('completeActivation() throws if activation has not been started', async (t)
   }
 });
 
+test('completeActivation() throws if address does not have license according to registry', async (t) => {
+  const registry = {
+    hasLicense: (address: string) => Promise.resolve(false),
+  } as ILicenseRegistry;
+
+  const storage = {} as ILicenseStorage;
+
+  const manager = new LicenseManager(registry, storage);
+
+  await manager.startActivation(wallet.address);
+
+  try {
+    await manager.completeActivation('response');
+  } catch (error) {
+    t.deepEqual((error as Error).message, 'Address does not have a license');
+  }
+});
+
 test('completeActivation() throws if response to address ownership challenge does not match', async (t) => {
   const registry = {
     hasLicense: (address: string) => Promise.resolve(true),
@@ -205,7 +203,7 @@ test('completeActivation() throws if response to address ownership challenge doe
   }
 });
 
-test('completeActivation() writes license to storage and sets isValid status to true if response matches address ownership challenge', async (t) => {
+test('completeActivation() writes license to storage, sets status to true and resets active challenge if address has license according to registry and response matches address ownership challenge', async (t) => {
   const registry = {
     hasLicense: (address: string) => Promise.resolve(true),
   } as ILicenseRegistry;
@@ -220,10 +218,11 @@ test('completeActivation() writes license to storage and sets isValid status to 
   } as ILicenseStorage;
 
   const manager = new LicenseManager(registry, storage);
+  const address = wallet.address;
 
-  const challengeData = await manager.startActivation(wallet.address);
+  const challengeData = await manager.startActivation(address);
 
-  t.plan(3);
+  t.plan(4);
 
   manager.emitter.on(
     LicenseManagerEvent.LicenseValidityChanged,
@@ -239,9 +238,11 @@ test('completeActivation() writes license to storage and sets isValid status to 
   t.true(manager.isValid);
   t.deepEqual(storedLicense, {
     challenge: {
-      address: wallet.address,
+      address: address,
       data: challengeData,
       response: signedChallengeData,
     },
   } as License);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  t.deepEqual((manager as any).activeChallenge, undefined);
 });

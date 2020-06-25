@@ -11,6 +11,7 @@ export enum LicenseManagerEvent {
 export interface ILicenseStorage {
   getLicense(): Promise<License>;
   setLicense(license: License): Promise<void>;
+  removeLicense(): Promise<void>;
 }
 
 export interface ILicenseManager {
@@ -20,7 +21,7 @@ export interface ILicenseManager {
   activate(
     challenge: AddressOwnershipChallenge,
     response: string
-  ): Promise<boolean>;
+  ): Promise<void>;
 
   startActivation(address: string): Promise<string>;
   completeActivation(challengeResponse: string): Promise<void>;
