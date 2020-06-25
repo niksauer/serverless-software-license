@@ -1,11 +1,11 @@
 import test from 'ava';
 import { ILicenseRegistry } from './interfaces/registry';
+import { LicenseManager } from './LicenseManager';
 import {
   ILicenseStorage,
   License,
   LicenseManagerEvent,
 } from './interfaces/manager';
-import { LicenseManager } from './LicenseManager';
 import { ethers } from 'ethers';
 import { AddressOwnershipChallenge } from '..';
 
@@ -135,4 +135,113 @@ test("checkValidity() returns true if license's address ownership challenge pass
 
   t.true(await manager.checkValidity());
   t.true(manager.isValid);
+});
+
+test("startActivation() throws if address doesn't have a license acccording to registry", async (t) => {
+  const registry = {
+    hasLicense: (address: string) => Promise.resolve(false),
+  } as ILicenseRegistry;
+
+  const storage = {} as ILicenseStorage;
+
+  const manager = new LicenseManager(registry, storage);
+  const address = 'test';
+
+  try {
+    await manager.startActivation(address);
+  } catch (error) {
+    t.deepEqual((error as Error).message, 'Address does not have a license');
+  }
+});
+
+test('startActivation() sets active challenge and returns a string if address has a license according to registry', async (t) => {
+  const registry = {
+    hasLicense: (address: string) => Promise.resolve(true),
+  } as ILicenseRegistry;
+
+  const storage = {} as ILicenseStorage;
+
+  const manager = new LicenseManager(registry, storage);
+  const address = 'test';
+
+  const challengeData = await manager.startActivation(address);
+
+  t.deepEqual(typeof challengeData, 'string');
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  t.deepEqual((manager as any).activeChallenge, {
+    address,
+    data: challengeData,
+  });
+});
+
+test('completeActivation() throws if activation has not been started', async (t) => {
+  const registry = {} as ILicenseRegistry;
+  const storage = {} as ILicenseStorage;
+
+  const manager = new LicenseManager(registry, storage);
+
+  try {
+    await manager.completeActivation('response');
+  } catch (error) {
+    t.deepEqual((error as Error).message, 'No pending activation');
+  }
+});
+
+test('completeActivation() throws if response to address ownership challenge does not match', async (t) => {
+  const registry = {
+    hasLicense: (address: string) => Promise.resolve(true),
+  } as ILicenseRegistry;
+
+  const storage = {} as ILicenseStorage;
+
+  const manager = new LicenseManager(registry, storage);
+
+  await manager.startActivation(wallet.address);
+
+  try {
+    await manager.completeActivation('response');
+  } catch (error) {
+    t.deepEqual((error as Error).message, 'Address ownership challenge failed');
+  }
+});
+
+test('completeActivation() writes license to storage and sets isValid status to true if response matches address ownership challenge', async (t) => {
+  const registry = {
+    hasLicense: (address: string) => Promise.resolve(true),
+  } as ILicenseRegistry;
+
+  let storedLicense: License | undefined;
+
+  const storage = {
+    setLicense: (license: License) => {
+      storedLicense = license;
+      return Promise.resolve();
+    },
+  } as ILicenseStorage;
+
+  const manager = new LicenseManager(registry, storage);
+
+  const challengeData = await manager.startActivation(wallet.address);
+
+  t.plan(3);
+
+  manager.emitter.on(
+    LicenseManagerEvent.LicenseValidityChanged,
+    (isValid: boolean) => {
+      t.true(isValid);
+    }
+  );
+
+  const signedChallengeData = await wallet.signMessage(challengeData);
+
+  await manager.completeActivation(signedChallengeData);
+
+  t.true(manager.isValid);
+  t.deepEqual(storedLicense, {
+    challenge: {
+      address: wallet.address,
+      data: challengeData,
+      response: signedChallengeData,
+    },
+  } as License);
 });

@@ -2,10 +2,12 @@ import {
   ILicenseManager,
   LicenseManagerEvent,
   ILicenseStorage,
+  License,
 } from './interfaces/manager';
 import { ILicenseRegistry } from './interfaces/registry';
 import { AddressOwnershipChallenge, EventEmitter } from './interfaces/util';
 import Events from 'events';
+import { getRandomData } from './util';
 import { verifyOwnership } from './util';
 
 export class LicenseManager implements ILicenseManager {
@@ -44,12 +46,42 @@ export class LicenseManager implements ILicenseManager {
     throw new Error('Method not implemented.');
   }
 
-  startActivation(address: string): string {
-    throw new Error('Method not implemented.');
+  async startActivation(address: string): Promise<string> {
+    if (!(await this.registry.hasLicense(address))) {
+      throw new Error('Address does not have a license');
+    }
+
+    const data = getRandomData(32);
+
+    this.activeChallenge = { address, data };
+
+    return data;
   }
 
-  completeActivation(challengeResponse: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+  async completeActivation(challengeResponse: string): Promise<void> {
+    if (!this.activeChallenge) {
+      throw new Error('No pending activation');
+    }
+
+    const ownsAddress = verifyOwnership(
+      this.activeChallenge,
+      challengeResponse
+    );
+
+    if (!ownsAddress) {
+      throw new Error('Address ownership challenge failed');
+    }
+
+    const license: License = {
+      challenge: {
+        ...this.activeChallenge,
+        response: challengeResponse,
+      },
+    };
+
+    await this.storage.setLicense(license);
+    this.activeChallenge = undefined;
+    this.setIsValid(true);
   }
 
   stopActivation(): void {

@@ -22,8 +22,8 @@ export interface ILicenseManager {
     response: string
   ): Promise<boolean>;
 
-  startActivation(address: string): string;
-  completeActivation(challengeResponse: string): Promise<boolean>;
+  startActivation(address: string): Promise<string>;
+  completeActivation(challengeResponse: string): Promise<void>;
   stopActivation(): void;
 
   checkValidity(): Promise<boolean>;

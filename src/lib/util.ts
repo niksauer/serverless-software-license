@@ -1,5 +1,6 @@
 import { AddressOwnershipChallenge } from './interfaces/util';
 import { ethers } from 'ethers';
+import crypto from 'crypto';
 
 /**
  * Verifies the ownership of an Ethereum address by checking the signature of a challenge response
@@ -34,4 +35,8 @@ export async function relayTransaction(
   signedTransaction: string
 ): Promise<ethers.providers.TransactionResponse> {
   return provider.sendTransaction(signedTransaction);
+}
+
+export function getRandomData(size: number): string {
+  return crypto.randomBytes(size).toString();
 }
