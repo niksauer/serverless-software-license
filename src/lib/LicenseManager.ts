@@ -45,7 +45,11 @@ export class LicenseManager implements ILicenseManager {
     throw new Error('Method not implemented.');
   }
 
-  startActivation(address: string): string {
+  async startActivation(address: string): Promise<string> {
+    if (!(await this.registry.hasLicense(address))) {
+      throw new Error('Address does not have a license');
+    }
+
     const data = getRandomData(32);
 
     this.activeChallenge = { address, data };

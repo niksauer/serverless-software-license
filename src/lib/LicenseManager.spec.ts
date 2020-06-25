@@ -137,14 +137,34 @@ test("checkValidity() returns true if license's address ownership challenge pass
   t.true(manager.isValid);
 });
 
-test('startActivation() sets active challenge and returns a string', (t) => {
-  const registry = {} as ILicenseRegistry;
+test("startActivation() throws if address doesn't have a license acccording to registry", async (t) => {
+  const registry = {
+    hasLicense: (address: string) => Promise.resolve(false),
+  } as ILicenseRegistry;
+
   const storage = {} as ILicenseStorage;
 
   const manager = new LicenseManager(registry, storage);
   const address = 'test';
 
-  const challengeData = manager.startActivation(address);
+  try {
+    await manager.startActivation(address);
+  } catch (error) {
+    t.deepEqual((error as Error).message, 'Address does not have a license');
+  }
+});
+
+test('startActivation() sets active challenge and returns a string if address has a license according to registry', async (t) => {
+  const registry = {
+    hasLicense: (address: string) => Promise.resolve(true),
+  } as ILicenseRegistry;
+
+  const storage = {} as ILicenseStorage;
+
+  const manager = new LicenseManager(registry, storage);
+  const address = 'test';
+
+  const challengeData = await manager.startActivation(address);
 
   t.deepEqual(typeof challengeData, 'string');
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
