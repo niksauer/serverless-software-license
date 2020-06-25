@@ -52,8 +52,7 @@
     "node": ">=8.9"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^3.0.1",
-    "ethers": "^5.0.2"
+    "@openzeppelin/contracts": "^3.0.1"
   },
   "devDependencies": {
     "@bitjson/npm-scripts-info": "^1.0.0",
@@ -108,6 +107,7 @@
     ]
   },
   "peerDependencies": {
-    "react": "^16.13.1"
+    "ethers": "^5.0.2",
+    "react": "^16.12.0"
   }
 }

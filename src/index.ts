@@ -19,3 +19,4 @@ export {
 export { AddressOwnershipChallenge } from './lib/interfaces/util';
 
 export { LicenseProvider } from './lib/adapter/react/LicenseProvider';
+export { setupTestEnvironment, TestEnvironment } from './lib/test-util';
