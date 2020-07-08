@@ -11,9 +11,14 @@ export interface TestEnvironment {
   getSigner(address: string): ethers.Signer;
 }
 
+export interface ContractOptions {
+  name: string;
+  symbol: string;
+}
+
 async function deployContract(
-  provider: ethers.providers.Provider,
-  deployer: ethers.Signer
+  deployer: ethers.Signer,
+  options: ContractOptions
 ): Promise<string> {
   // https://docs.ethers.io/ethers.js/html/api-contract.html
   const contractFactory = new ethers.ContractFactory(
@@ -22,7 +27,7 @@ async function deployContract(
     deployer
   );
 
-  const contract = await contractFactory.deploy('Fantastical', 'FANTA');
+  const contract = await contractFactory.deploy(options.name, options.symbol);
 
   // The address the contract WILL have once mined
   // console.log(contract.address);
@@ -38,6 +43,7 @@ async function deployContract(
 }
 
 export async function setupTestEnvironment(
+  contract: ContractOptions,
   options?: Ganache.IProviderOptions
 ): Promise<TestEnvironment> {
   const blockchain = Ganache.provider({
@@ -54,7 +60,7 @@ export async function setupTestEnvironment(
   const deployerAddress = accounts[0];
   const deployerSigner = provider.getSigner(deployerAddress);
 
-  const contractAddress = await deployContract(provider, deployerSigner);
+  const contractAddress = await deployContract(deployerSigner, contract);
 
   return {
     provider,
@@ -67,8 +73,8 @@ export async function setupTestEnvironment(
 }
 
 // https://medium.com/edgefund/time-travelling-truffle-tests-f581c1964687
-export async function advanceBlock(
-  provider: providers.JsonRpcProvider
-): Promise<void> {
-  await provider.send('evm_mine', [{ id: new Date().getTime() }]);
-}
+// export async function advanceBlock(
+//   provider: providers.JsonRpcProvider
+// ): Promise<void> {
+//   await provider.send('evm_mine', [{ id: new Date().getTime() }]);
+// }

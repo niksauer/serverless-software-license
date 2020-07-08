@@ -1,10 +1,18 @@
 import test from 'ava';
 import { LicenseRegistry } from './LicenseRegistry';
-import { setupTestEnvironment, TestEnvironment } from './test-util';
+import {
+  setupTestEnvironment,
+  TestEnvironment,
+  ContractOptions,
+} from './test-util';
 import { ethers } from 'ethers';
 
 test.beforeEach(async (t) => {
-  const environment = await setupTestEnvironment();
+  const contract: ContractOptions = {
+    name: 'Fantastical',
+    symbol: 'FANTA',
+  };
+  const environment = await setupTestEnvironment(contract);
 
   (t.context as TestEnvironment) = {
     provider: environment.provider,

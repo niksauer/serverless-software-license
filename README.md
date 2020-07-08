@@ -9,11 +9,7 @@
 ### Development
 
 1. `yarn install --frozen-lockfile`
-2. `yarn install-peers -f`
-
-Peer have to be reinstalled after each `yarn install` or `yarn add` etc.
-
-3. `yarn watch`
+2. `yarn watch`
 
 ### Develop Smart-Contracts
 

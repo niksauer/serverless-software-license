@@ -2,7 +2,7 @@ import test from 'ava';
 import { verifyOwnership, relayTransaction } from './util';
 import { AddressOwnershipChallenge } from './interfaces/util';
 import { ethers } from 'ethers';
-import { setupTestEnvironment } from './test-util';
+import { setupTestEnvironment, ContractOptions } from './test-util';
 
 const walletA = ethers.Wallet.createRandom();
 const walletB = ethers.Wallet.createRandom();
@@ -56,7 +56,11 @@ test('verifyOwnership() returns false if the challenged address signs different 
 });
 
 test('relayTransaction() broadcasts a transaction', async (t) => {
-  const { deployerSigner, provider } = await setupTestEnvironment();
+  const contract: ContractOptions = {
+    name: 'Fantastical',
+    symbol: 'FANTA',
+  };
+  const { deployerSigner, provider } = await setupTestEnvironment(contract);
 
   // only accounts provided through environment are pre-funded,
   // however they don't support eth_signtransation
