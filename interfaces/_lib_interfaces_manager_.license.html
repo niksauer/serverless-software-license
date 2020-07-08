@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>serverless-software-license</title>
+	<title>License | serverless-software-license</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">serverless-software-license</a>
+					<a href="../index.html" class="title">serverless-software-license</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -53,95 +53,115 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_lib_interfaces_manager_.html">&quot;lib/interfaces/manager&quot;</a>
+				</li>
+				<li>
+					<a href="_lib_interfaces_manager_.license.html">License</a>
 				</li>
 			</ul>
-			<h1>serverless-software-license</h1>
+			<h1>Interface License</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#serverless-software-license" id="serverless-software-license" style="color: inherit; text-decoration: none;">
-					<h1>Serverless Software License</h1>
-				</a>
-				<p>This project was bootstraped through <a href="https://github.com/niksauer/typescript-library-starter">https://github.com/niksauer/typescript-library-starter</a>.</p>
-				<a href="#prerequisites" id="prerequisites" style="color: inherit; text-decoration: none;">
-					<h3>Prerequisites</h3>
-				</a>
-				<ul>
-					<li>Docker (Compose)</li>
-					<li>Truffle (<code>npm install -g truffle</code>)</li>
-					<li>Yarn (<code>npm install -g yarn</code>)</li>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">License</span>
+					</li>
 				</ul>
-				<a href="#setup" id="setup" style="color: inherit; text-decoration: none;">
-					<h3>Setup</h3>
-				</a>
-				<ol>
-					<li><code>yarn install --ignore-optional --frozen-lockfile</code></li>
-					<li><code>yarn install-peers -f</code></li>
-				</ol>
-				<p>Peer have to be reinstalled after each <code>yarn install</code>. Further, to prevent optional dependencies from being installed in the future, don&#39;t forget to include <code>--ignore-optional</code> in <code>yarn add --ignore-optional &lt;package&gt;</code>.</p>
-				<a href="#develop-library" id="develop-library" style="color: inherit; text-decoration: none;">
-					<h3>Develop Library</h3>
-				</a>
-				<ol>
-					<li><code>yarn watch</code></li>
-				</ol>
-				<a href="#develop-smart-contracts" id="develop-smart-contracts" style="color: inherit; text-decoration: none;">
-					<h3>Develop Smart-Contracts</h3>
-				</a>
-				<ol>
-					<li><code>cd ethereum</code></li>
-					<li><code>docker-compose up</code></li>
-					<li><code>truffle build</code></li>
-					<li><code>truffle migrate</code></li>
-				</ol>
-				<a href="#other" id="other" style="color: inherit; text-decoration: none;">
-					<h3>Other</h3>
-				</a>
-				<p>For TypeDoc library mode see: <a href="https://github.com/TypeStrong/typedoc/pull/1184#issuecomment-630552403">https://github.com/TypeStrong/typedoc/pull/1184#issuecomment-630552403</a></p>
-			</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_interfaces_manager_.license.html#challenge" class="tsd-kind-icon">challenge</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="challenge" class="tsd-anchor"></a>
+					<h3>challenge</h3>
+					<div class="tsd-signature tsd-kind-icon">challenge<span class="tsd-signature-symbol">:</span> <a href="_index_.addressownershipchallenge.html" class="tsd-signature-type">AddressOwnershipChallenge</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/niksauer/serverless-software-license/blob/02f6c73/src/lib/interfaces/manager.ts#L4">lib/interfaces/manager.ts:4</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_index_.html">&quot;index&quot;</a>
+						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_lib_licensemanager_.html">&quot;lib/<wbr>License<wbr>Manager&quot;</a>
+						<a href="../modules/_lib_licensemanager_.html">&quot;lib/<wbr>License<wbr>Manager&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_lib_licenseregistry_.html">&quot;lib/<wbr>License<wbr>Registry&quot;</a>
+						<a href="../modules/_lib_licenseregistry_.html">&quot;lib/<wbr>License<wbr>Registry&quot;</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/_lib_interfaces_manager_.html">&quot;lib/interfaces/manager&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_lib_interfaces_manager_.html">&quot;lib/interfaces/manager&quot;</a>
+						<a href="../modules/_lib_interfaces_registry_.html">&quot;lib/interfaces/registry&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_lib_interfaces_registry_.html">&quot;lib/interfaces/registry&quot;</a>
+						<a href="../modules/_lib_interfaces_util_.html">&quot;lib/interfaces/util&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_lib_interfaces_util_.html">&quot;lib/interfaces/util&quot;</a>
+						<a href="../modules/_lib_storage_filelicensestorage_.html">&quot;lib/storage/<wbr>File<wbr>License<wbr>Storage&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_lib_storage_filelicensestorage_.html">&quot;lib/storage/<wbr>File<wbr>License<wbr>Storage&quot;</a>
+						<a href="../modules/_lib_test_util_.html">&quot;lib/test-<wbr>util&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_lib_test_util_.html">&quot;lib/test-<wbr>util&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_lib_util_.html">&quot;lib/util&quot;</a>
+						<a href="../modules/_lib_util_.html">&quot;lib/util&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-module">
+						<a href="../enums/_lib_interfaces_manager_.licensemanagerevent.html" class="tsd-kind-icon">License<wbr>Manager<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="_lib_interfaces_manager_.ilicensemanager.html" class="tsd-kind-icon">ILicense<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="_lib_interfaces_manager_.ilicensestorage.html" class="tsd-kind-icon">ILicense<wbr>Storage</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="_lib_interfaces_manager_.license.html" class="tsd-kind-icon">License</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_interfaces_manager_.license.html#challenge" class="tsd-kind-icon">challenge</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>
@@ -211,7 +231,7 @@
 	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
