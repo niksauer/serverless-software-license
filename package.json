@@ -27,7 +27,7 @@
     "cov:check": "nyc report && nyc check-coverage",
     "cov:check-strict": "nyc report && nyc check-coverage --lines 100 --functions 100 --branches 100",
     "doc": "run-s doc:html && open-cli build/docs/index.html",
-    "doc:html": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --out build/docs",
+    "doc:html": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode library --out build/docs src/index.ts",
     "doc:json": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --json build/docs/typedoc.json",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "version": "standard-version",
@@ -79,7 +79,7 @@
     "prettier": "^2.0.5",
     "standard-version": "^8.0.0",
     "trash-cli": "^3.0.0",
-    "typedoc": "^0.17.7",
+    "typedoc": "0.17.0-3",
     "typescript": "<3.10.0"
   },
   "ava": {
