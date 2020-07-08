@@ -24,8 +24,6 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
-const deployer = '0x41c1c3d1f21a46ab84e4535167044676c30875be';
-
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -48,8 +46,15 @@ module.exports = {
      host: "127.0.0.1",     // Localhost (default: none)
      port: 8545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
-     from: deployer
+     from: '0x41c1c3d1f21a46ab84e4535167044676c30875be'
     },
+
+    goerli: {
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 8545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+      from: '0x0cBA519aC95879BDE88C975E918F78270972AF30'
+     },
 
     // Another network with more advanced options...
     // advanced: {
