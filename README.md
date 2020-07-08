@@ -5,13 +5,17 @@ This project was bootstraped through https://github.com/niksauer/typescript-libr
 ### Prerequisites
 
 - Docker (Compose)
-- `npm install -g truffle`
-- `npm install -g yarn`
+- Truffle (`npm install -g truffle`)
+- Yarn (`npm install -g yarn`)
+
+### Setup
+
+1. `yarn install --ignore-optional --frozen-lockfile`
+2. `yarn install-peers -f`
 
 ### Develop Library
 
-1. `yarn install`
-2. `yarn watch`
+1. `yarn watch`
 
 ### Develop Smart-Contracts
 
