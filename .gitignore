@@ -13,3 +13,5 @@ package-lock.json
 .DS_Store
 
 ethereum/ganache-data
+
+serverless-software-license*.tgz
