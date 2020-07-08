@@ -5,14 +5,13 @@ import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 // import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 
-
 // https://docs.openzeppelin.com/contracts/3.x/erc20
 contract LicenseToken is ERC20, Ownable {
     // MARK: - Events
     event LicensePurchased(address indexed buyer);
 
     // MARK: - Public Properties
-    uint256 public constant LICENSE_PRICE = 0.5 ether;
+    uint256 public price = 0.5 ether;
 
     // MARK: - Initialization
     constructor(string memory name, string memory symbol)
@@ -26,11 +25,23 @@ contract LicenseToken is ERC20, Ownable {
     // MARK: - Public Methods
     function purchaseLicense(address owner) public payable {
         require(owner != address(0), 'INVALID_OWNER_ADDRESS');
-        require(msg.value >= LICENSE_PRICE, 'INSUFFICIENT_FUNDS');
+        require(msg.value >= price, 'INSUFFICIENT_FUNDS');
 
         _mint(owner, 1);
 
         emit LicensePurchased(owner);
+    }
+
+    function purchaseLicenseInternal(address owner) public onlyOwner {
+        require(owner != address(0), 'INVALID_OWNER_ADDRESS');
+
+        _mint(owner, 1);
+
+        emit LicensePurchased(owner);
+    }
+
+    function setLicensePrice(uint256 newPrice) public onlyOwner {
+        price = newPrice;
     }
 }
 

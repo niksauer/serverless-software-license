@@ -41,7 +41,7 @@ export class LicenseRegistry implements ILicenseRegistry {
    */
   licensePrice(): Promise<BigNumber> {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    return this.contract.LICENSE_PRICE() as Promise<BigNumber>;
+    return this.contract.price() as Promise<BigNumber>;
   }
 
   /**
