@@ -1,0 +1,508 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>LicenseRegistry | serverless-software-license</title>
+	<meta name="description" content="Documentation for serverless-software-license">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">serverless-software-license</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="licenseregistry.html">LicenseRegistry</a>
+				</li>
+			</ul>
+			<h1>Class LicenseRegistry</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">LicenseRegistry</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/ilicenseregistry.html" class="tsd-signature-type">ILicenseRegistry</a></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="licenseregistry.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="licenseregistry.html#contract" class="tsd-kind-icon">contract</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="licenseregistry.html#generatepurchasetransaction" class="tsd-kind-icon">generate<wbr>Purchase<wbr>Transaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="licenseregistry.html#haslicense" class="tsd-kind-icon">has<wbr>License</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="licenseregistry.html#licenseprice" class="tsd-kind-icon">license<wbr>Price</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="licenseregistry.html#numberoflicenses" class="tsd-kind-icon">number<wbr>OfLicenses</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="licenseregistry.html#purchaselicense" class="tsd-kind-icon">purchase<wbr>License</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="licenseregistry.html#subscribe" class="tsd-kind-icon">subscribe</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>License<wbr>Registry<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, signerOrProvider<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Signer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Provider</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="licenseregistry.html" class="tsd-signature-type">LicenseRegistry</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/niksauer/serverless-software-license/blob/a115e88/src/lib/LicenseRegistry.ts#L20">lib/LicenseRegistry.ts:20</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>address: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>signerOrProvider: <span class="tsd-signature-type">Signer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Provider</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="licenseregistry.html" class="tsd-signature-type">LicenseRegistry</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="contract" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> contract</h3>
+					<div class="tsd-signature tsd-kind-icon">contract<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Contract</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/niksauer/serverless-software-license/blob/a115e88/src/lib/LicenseRegistry.ts#L20">lib/LicenseRegistry.ts:20</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="generatepurchasetransaction" class="tsd-anchor"></a>
+					<h3>generate<wbr>Purchase<wbr>Transaction</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Purchase<wbr>Transaction<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">BigNumber</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UnsignedTransaction</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/ilicenseregistry.html">ILicenseRegistry</a>.<a href="../interfaces/ilicenseregistry.html#generatepurchasetransaction">generatePurchaseTransaction</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/niksauer/serverless-software-license/blob/a115e88/src/lib/LicenseRegistry.ts#L95">lib/LicenseRegistry.ts:95</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Populates a license purchase transaction that must be broadcasted manually.
+									Like &#39;purchaseLicense&#39;, the price will be auto-set, though may be overriden.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>address: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Address to be set as the license owner</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> value: <span class="tsd-signature-type">BigNumber</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Amount of wei to pay for a license</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UnsignedTransaction</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Unsigned transaction to be relayed</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="haslicense" class="tsd-anchor"></a>
+					<h3>has<wbr>License</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">has<wbr>License<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/ilicenseregistry.html">ILicenseRegistry</a>.<a href="../interfaces/ilicenseregistry.html#haslicense">hasLicense</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/niksauer/serverless-software-license/blob/a115e88/src/lib/LicenseRegistry.ts#L64">lib/LicenseRegistry.ts:64</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>address: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Address to be queried</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>True if the address owns at least one license</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="licenseprice" class="tsd-anchor"></a>
+					<h3>license<wbr>Price</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">license<wbr>Price<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BigNumber</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/ilicenseregistry.html">ILicenseRegistry</a>.<a href="../interfaces/ilicenseregistry.html#licenseprice">licensePrice</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/niksauer/serverless-software-license/blob/a115e88/src/lib/LicenseRegistry.ts#L42">lib/LicenseRegistry.ts:42</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Price of a single license as recorded in the smart-contract</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">BigNumber</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="numberoflicenses" class="tsd-anchor"></a>
+					<h3>number<wbr>OfLicenses</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">number<wbr>OfLicenses<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/ilicenseregistry.html">ILicenseRegistry</a>.<a href="../interfaces/ilicenseregistry.html#numberoflicenses">numberOfLicenses</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/niksauer/serverless-software-license/blob/a115e88/src/lib/LicenseRegistry.ts#L53">lib/LicenseRegistry.ts:53</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>address: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Address to be queried</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Number of licenses owned by the address</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="purchaselicense" class="tsd-anchor"></a>
+					<h3>purchase<wbr>License</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">purchase<wbr>License<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">BigNumber</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Transaction</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/ilicenseregistry.html">ILicenseRegistry</a>.<a href="../interfaces/ilicenseregistry.html#purchaselicense">purchaseLicense</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/niksauer/serverless-software-license/blob/a115e88/src/lib/LicenseRegistry.ts#L76">lib/LicenseRegistry.ts:76</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Purchases a new license. By default, the current price will be auto-filled,
+									though may be overriden as a tip to the developer.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>address: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Address to be set as the license owner</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> value: <span class="tsd-signature-type">BigNumber</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Amount of wei to pay for a license</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Transaction</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="subscribe" class="tsd-anchor"></a>
+					<h3>subscribe</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">subscribe&lt;Event&gt;<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span>, handler<span class="tsd-signature-symbol">: </span><a href="../globals.html#licensetokeneventhandler" class="tsd-signature-type">LicenseTokenEventHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/ilicenseregistry.html">ILicenseRegistry</a>.<a href="../interfaces/ilicenseregistry.html#subscribe">subscribe</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/niksauer/serverless-software-license/blob/a115e88/src/lib/LicenseRegistry.ts#L110">lib/LicenseRegistry.ts:110</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets a listener that will be called for each contract event.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>Event<span class="tsd-signature-symbol">: </span><a href="../enums/licensetokenevent.html" class="tsd-signature-type">LicenseTokenEvent</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">Event</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Events to be considered</p>
+									</div>
+								</li>
+								<li>
+									<h5>handler: <a href="../globals.html#licensetokeneventhandler" class="tsd-signature-type">LicenseTokenEventHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Callback to be run for each event</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/licensemanagerevent.html" class="tsd-kind-icon">License<wbr>Manager<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/licensetokenevent.html" class="tsd-kind-icon">License<wbr>Token<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="filelicensestorage.html" class="tsd-kind-icon">File<wbr>License<wbr>Storage</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="licensemanager.html" class="tsd-kind-icon">License<wbr>Manager</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="licenseregistry.html" class="tsd-kind-icon">License<wbr>Registry</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="licenseregistry.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="licenseregistry.html#contract" class="tsd-kind-icon">contract</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="licenseregistry.html#generatepurchasetransaction" class="tsd-kind-icon">generate<wbr>Purchase<wbr>Transaction</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="licenseregistry.html#haslicense" class="tsd-kind-icon">has<wbr>License</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="licenseregistry.html#licenseprice" class="tsd-kind-icon">license<wbr>Price</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="licenseregistry.html#numberoflicenses" class="tsd-kind-icon">number<wbr>OfLicenses</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="licenseregistry.html#purchaselicense" class="tsd-kind-icon">purchase<wbr>License</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="licenseregistry.html#subscribe" class="tsd-kind-icon">subscribe</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/addressownershipchallenge.html" class="tsd-kind-icon">Address<wbr>Ownership<wbr>Challenge</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ilicensemanager.html" class="tsd-kind-icon">ILicense<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ilicenseregistry.html" class="tsd-kind-icon">ILicense<wbr>Registry</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ilicensestorage.html" class="tsd-kind-icon">ILicense<wbr>Storage</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/license.html" class="tsd-kind-icon">License</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/testenvironment.html" class="tsd-kind-icon">Test<wbr>Environment</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#eventemitter" class="tsd-kind-icon">Event<wbr>Emitter</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#licensepurchasedeventhandler" class="tsd-kind-icon">License<wbr>Purchased<wbr>Event<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#licenseregistryeventhandler" class="tsd-kind-icon">License<wbr>Registry<wbr>Event<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../globals.html#licensetokeneventhandler" class="tsd-kind-icon">License<wbr>Token<wbr>Event<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#readfileasync" class="tsd-kind-icon">read<wbr>File<wbr>Async</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#removefileasync" class="tsd-kind-icon">remove<wbr>File<wbr>Async</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#writefileasync" class="tsd-kind-icon">write<wbr>File<wbr>Async</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#advanceblock" class="tsd-kind-icon">advance<wbr>Block</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#deploycontract" class="tsd-kind-icon">deploy<wbr>Contract</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#getrandomdata" class="tsd-kind-icon">get<wbr>Random<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#relaytransaction" class="tsd-kind-icon">relay<wbr>Transaction</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#setuptestenvironment" class="tsd-kind-icon">setup<wbr>Test<wbr>Environment</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#verifyownership" class="tsd-kind-icon">verify<wbr>Ownership</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
