@@ -12,3 +12,9 @@ build/docs
 coverage
 .nyc_output
 *.log
+Makefile
+Dockerfile
+.dockerignore
+.editorconfig
+.eslintignore
+ethereum

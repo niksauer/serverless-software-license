@@ -1,23 +1,19 @@
 # Serverless Software License
 
-This project was bootstraped through https://github.com/niksauer/typescript-library-starter.
-
 ### Prerequisites
 
-- Docker (Compose)
+- Docker
 - Truffle (`npm install -g truffle`)
 - Yarn (`npm install -g yarn`)
 
-### Setup
+### Development
 
-1. `yarn install --ignore-optional --frozen-lockfile`
+1. `yarn install --frozen-lockfile`
 2. `yarn install-peers -f`
 
-Peer have to be reinstalled after each `yarn install`. Further, to prevent optional dependencies from being installed in the future, don't forget to include `--ignore-optional` in `yarn add --ignore-optional <package>`.
+Peer have to be reinstalled after each `yarn install` or `yarn add` etc.
 
-### Develop Library
-
-1. `yarn watch`
+3. `yarn watch`
 
 ### Develop Smart-Contracts
 
@@ -28,4 +24,5 @@ Peer have to be reinstalled after each `yarn install`. Further, to prevent optio
 
 ### Other
 
-For TypeDoc library mode see: https://github.com/TypeStrong/typedoc/pull/1184#issuecomment-630552403
+- Project [template](https://github.com/niksauer/typescript-library-starter)
+- TypeDoc's new [library mode](https://github.com/TypeStrong/typedoc/pull/1184#issuecomment-630552403)
