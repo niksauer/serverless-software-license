@@ -17,3 +17,7 @@ export {
 } from './lib/interfaces/registry';
 
 export { AddressOwnershipChallenge } from './lib/interfaces/util';
+
+import LicenseToken from './abi/LicenseToken.json';
+
+export { LicenseToken as LicenseTokenContractAbi };
