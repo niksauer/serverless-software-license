@@ -33,7 +33,7 @@
     "version": "standard-version",
     "reset": "git clean -dfx && git reset --hard && yarn install --frozen-lockfile",
     "clean": "rm -rf build test",
-    "prepare-release": "run-s reset test cov:check doc:html doc:publish",
+    "prepare-release": "run-s reset test cov:check doc:html version doc:publish",
     "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('serverless-software-license must be installed with Yarn: https://yarnpkg.com/')\"",
     "postpack": "mv serverless-software-license-*.tgz serverless-software-license.tgz"
   },
